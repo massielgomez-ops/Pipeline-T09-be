@@ -1,0 +1,31 @@
+# docker-compose -f docker-compose-db.yml up -d
+
+# docker-compose -f docker-compose-db.yml down
+
+#CASO DE CONCaFLORES PIERRE
+# por si no funciona poner "docker network create my-network"
+# prender
+# docker-compose -f docker-compose-pierre/docker-compose-be.yml up -d
+
+# apagar
+# docker-compose -f docker-compose-pierre/docker-compose-be.yml down
+version: '3'
+
+services:
+  api:
+    build: ..
+    container_name: springboot-sqlserver
+    ports:
+      - "8086:8086"
+    environment:
+      - PORT=8086
+      - SERVER_URL=http://localhost:8086
+      - SPRING_DATASOURCE_URL=jdbc:sqlserver://sqlserver:1433;databaseName=agro_db;encrypt=true;trustServerCertificate=true
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=Alexis123!
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    external: true

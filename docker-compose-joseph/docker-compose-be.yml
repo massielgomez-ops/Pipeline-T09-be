@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  api:
+    image: joseph2307/joseph-backend:1.0
+    container_name: joseph-backend
+    ports:
+      - "8087:8086"
+    environment:
+      - PORT=8086
+      - SERVER_URL=http://localhost:8087
+      
+      - SPRING_DATASOURCE_URL=jdbc:sqlserver://sqlserver:1433;databaseName=agro_db;encrypt=true;trustServerCertificate=true
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=Alexis123!
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    external: true

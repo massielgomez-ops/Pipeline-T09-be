@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  visons-app:
+    image: springboot-agro:local
+    container_name: springboot-sqlserver
+
+    ports:
+      - "8085:8085"
+
+    environment:
+      DB_URL: "jdbc:sqlserver://massiel-db:1433;databaseName=agro_db;encrypt=true;trustServerCertificate=true"
+      DB_USER: "sa"
+      DB_PASSWORD: "Alexis123!"
+      SERVER_URL: "http://localhost:8085"
+
+    networks:
+      - my-network
+
+    restart: on-failure
+
+networks:
+  my-network:
+    external: true
